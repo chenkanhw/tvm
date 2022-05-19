@@ -23,19 +23,19 @@ COPY utils/apt-install-and-clear.sh /usr/local/bin/apt-install-and-clear
 
 RUN apt-get update --fix-missing
 
-RUN apt-install-and-clear -y ca-certificates gnupg2 libxml2-dev
-
 COPY install/ubuntu_install_core.sh /install/ubuntu_install_core.sh
 RUN bash /install/ubuntu_install_core.sh
+
+# TODO: why do we need this?
+# RUN apt-get install -y ca-certificates gnupg2 libxml2-dev
 
 COPY install/ubuntu_install_googletest.sh /install/ubuntu_install_googletest.sh
 RUN bash /install/ubuntu_install_googletest.sh
 
+ENV TVM_VENV /venv/apache-tvm-py3.7
+COPY python/bootstrap/lockfiles /install/python/bootstrap/lockfiles
 COPY install/ubuntu2004_install_python.sh /install/ubuntu2004_install_python.sh
 RUN bash /install/ubuntu2004_install_python.sh
-
-# Globally disable pip cache
-RUN pip config set global.cache-dir false
 
 # Rust env (build early; takes a while)
 COPY install/ubuntu_install_rust.sh /install/ubuntu_install_rust.sh
@@ -44,6 +44,8 @@ ENV RUSTUP_HOME /opt/rust
 ENV CARGO_HOME /opt/rust
 ENV PATH $PATH:$CARGO_HOME/bin
 
+COPY python/build/pyproject.toml /install/python/pyproject.toml
+COPY python/build/poetry.lock /install/python/poetry.lock
 COPY install/ubuntu_install_python_package.sh /install/ubuntu_install_python_package.sh
 RUN bash /install/ubuntu_install_python_package.sh
 
@@ -71,15 +73,3 @@ ENV HEXAGON_TOOLCHAIN "${HEXAGON_SDK_ROOT}/tools/HEXAGON_Tools/8.5.08/Tools"
 COPY install/ubuntu_install_sccache.sh /install/ubuntu_install_sccache.sh
 RUN bash /install/ubuntu_install_sccache.sh
 ENV PATH /opt/sccache:$PATH
-
-# TensorFlow deps
-COPY install/ubuntu_install_tensorflow.sh /install/ubuntu_install_tensorflow.sh
-RUN bash /install/ubuntu_install_tensorflow.sh
-
-# TFLite deps
-COPY install/ubuntu_install_tflite.sh /install/ubuntu_install_tflite.sh
-RUN bash /install/ubuntu_install_tflite.sh
-
-# Install ONNX
-COPY install/ubuntu_install_onnx.sh /install/ubuntu_install_onnx.sh
-RUN bash /install/ubuntu_install_onnx.sh

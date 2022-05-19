@@ -16,31 +16,18 @@
 # specific language governing permissions and limitations
 # under the License.
 
-set -e
-set -u
-set -o pipefail
+set -euo pipefail
+set -x
 
-# install libraries for python package on ubuntu
-pip3 install --upgrade \
-    attrs \
-    cloudpickle \
-    cython \
-    decorator \
-    mypy \
-    numpy~=1.19.5 \
-    orderedset \
-    packaging \
-    Pillow==9.1.0 \
-    psutil \
-    pytest \
-    git+https://github.com/tlc-pack/tlcpack-sphinx-addon.git@14906063f938b7569e40f3d47a0ca39c181fb6ea \
-    pytest-profiling \
-    pytest-xdist \
-    requests \
-    scipy \
-    Jinja2 \
-    synr==0.6.0 \
-    junitparser==2.4.2 \
-    six \
-    tornado \
-    pytest-lazy-fixture
+if [ -z "${TVM_VENV+x}" ]; then
+    echo "install script error: must set TVM_VENV to the path to the venv symlink"
+    exit 2
+fi
+
+cd $(dirname $0)/python
+poetry config cache-dir /tmp/poetry-cache
+poetry config virtualenvs.path /venv
+
+poetry install --no-root "$@"
+VENV_ROOT=$(ls -d1 /venv/apache-tvm-*-py3.*)
+ln -s "${VENV_ROOT}" "${TVM_VENV}"
