@@ -42,7 +42,14 @@ sudo apt-get update
 
 sudo apt-install-and-clear -y cmake
 
-pip3 install west
+python3 -mvenv /venv/west
+. /venv/west/bin/activate
+pip3 install -U pip
+# TODO: is setuptools-scm needed?
+pip3 install \
+     setuptools-scm \
+     west
+ln -s /venv/west/bin/west /usr/local/bin/
 
 # Init ZephyrProject
 ZEPHYR_PROJECT_PATH=/opt/zephyrproject
