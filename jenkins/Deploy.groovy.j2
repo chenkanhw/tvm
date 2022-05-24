@@ -81,6 +81,7 @@ def deploy() {
     if (env.BRANCH_NAME == 'main' && env.DOCS_DEPLOY_ENABLED == 'yes') {
       node('CPU') {
         ws({{ m.per_exec_ws('tvm/deploy-docs') }}) {
+          docker_init(ci_gpu)
           {{ m.download_artifacts(tag='docs', filenames=["docs.tgz"]) }}
           deploy_docs()
         }

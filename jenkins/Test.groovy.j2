@@ -206,6 +206,7 @@ stage('Test') {
     platform="cpu",
     docker_image="ci_cpu",
   ) %}
+    docker_init(ci_cpu)
     {{ m.download_artifacts(tag='cpu', filenames=tvm_multilib_tsim) }}
     ci_setup(ci_cpu)
     cpp_unittest(ci_cpu)
@@ -223,6 +224,7 @@ stage('Test') {
     platform="qemu",
     docker_image="ci_qemu",
   ) %}
+    docker_init(ci_qemu)
     {{ m.download_artifacts(tag='qemu', filenames=tvm_lib, folders=microtvm_template_projects) }}
     add_microtvm_permissions()
     ci_setup(ci_qemu)
@@ -243,6 +245,7 @@ stage('Test') {
     platform="cpu",
     docker_image="ci_cpu",
 ) %}
+    docker_init(ci_cpu)
     {{ m.download_artifacts(tag='cpu', filenames=tvm_multilib) }}
     ci_setup(ci_cpu)
     sh (
@@ -256,6 +259,7 @@ stage('Test') {
         ws({{ m.per_exec_ws('tvm/docs-python-gpu') }}) {
           docker_init(ci_gpu)
           init_git()
+          docker_init(ci_gpu)
           {{ m.download_artifacts(tag='gpu', filenames=tvm_multilib, folders=microtvm_template_projects) }}
           add_microtvm_permissions()
           timeout(time: 180, unit: 'MINUTES') {
