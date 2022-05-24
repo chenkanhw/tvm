@@ -21,26 +21,26 @@ set -euxo pipefail
 source tests/scripts/setup-pytest-env.sh
 
 echo "Checking MyPy Type defs in the TensorIR schedule package."
-mypy  --check-untyped-defs python/tvm/tir/schedule
+"${TVM_VENV}/bin/mypy"  --check-untyped-defs python/tvm/tir/schedule
 
 echo "Checking MyPy Type defs in the meta schedule package."
-mypy  --check-untyped-defs python/tvm/meta_schedule
+"${TVM_VENV}/bin/mypy"  --check-untyped-defs python/tvm/meta_schedule
 
 echo "Checking MyPy Type defs in the analysis package."
-mypy  --check-untyped-defs python/tvm/tir/analysis/
+"${TVM_VENV}/bin/mypy"  --check-untyped-defs python/tvm/tir/analysis/
 
 echo "Checking MyPy Type defs in the transform package."
-mypy  --check-untyped-defs python/tvm/tir/transform/
+"${TVM_VENV}/bin/mypy"  --check-untyped-defs python/tvm/tir/transform/
 
 echo "Checking MyPy Type defs in the TIR package with unittest"
-MYPYPATH=$TVM_PATH/python mypy --check-untyped-defs tests/python/unittest/test_tvmscript_type.py
+MYPYPATH=$TVM_PATH/python "${TVM_VENV}/bin/mypy" --check-untyped-defs tests/python/unittest/test_tvmscript_type.py
 
 echo "Checking MyPy Type defs in tvm.relay.op.contrib"
-mypy --disallow-untyped-defs python/tvm/relay/op/contrib/cublas.py
-mypy --disallow-untyped-defs python/tvm/relay/op/contrib/cudnn.py
-mypy --disallow-untyped-defs python/tvm/relay/op/contrib/te_target.py
-mypy --disallow-untyped-defs python/tvm/relay/op/contrib/tensorrt.py
+"${TVM_VENV}/bin/mypy" --disallow-untyped-defs python/tvm/relay/op/contrib/cublas.py
+"${TVM_VENV}/bin/mypy" --disallow-untyped-defs python/tvm/relay/op/contrib/cudnn.py
+"${TVM_VENV}/bin/mypy" --disallow-untyped-defs python/tvm/relay/op/contrib/te_target.py
+"${TVM_VENV}/bin/mypy" --disallow-untyped-defs python/tvm/relay/op/contrib/tensorrt.py
 
 #TODO(@mikepapadim): This is failing atm
 # echo "Checking MyPy Type defs in the tvm.relay.backend.contrib.ethosu package."
-# mypy  --check-untyped-defs python/tvm/relay/backend/contrib/ethosu/
+# "${TVM_VENV}/bin/mypy"  --check-untyped-defs python/tvm/relay/backend/contrib/ethosu/

@@ -52,7 +52,7 @@ if [ ${filter_untracked} -eq 1 ]; then
     echo "NOTE: --local flag present, filtering untracked files"
     processed_rat_output="${rat_output}-processed"
     cat ${rat_output} | sed 's/^== File: //g' | \
-        python3 $(dirname "$0")/filter_untracked.py | \
+        "${TVM_VENV}/bin/python3" $(dirname "$0")/filter_untracked.py | \
         sed 's/^/== File: /g' >"${processed_rat_output}"
     rat_output="${processed_rat_output}"
 fi
@@ -63,7 +63,7 @@ if [ $success -eq 0 ]; then
     echo "No files violate ASF header check"
 else
     if [ $fix -eq 1 ]; then
-        python3 tests/lint/add_asf_header.py "${rat_output}"
+        "${TVM_VENV}/bin/python3" tests/lint/add_asf_header.py "${rat_output}"
         echo "Ran add_asf_header.py to fix the following files:"
     else
         echo "Need to add ASF header to the following files."

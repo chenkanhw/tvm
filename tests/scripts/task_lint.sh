@@ -28,6 +28,8 @@ trap cleanup 0
 # These shards are solely for CI to enable the lint job to have some parallelism.
 
 function shard1 {
+  . "${TVM_VENV}/bin/activate"
+
   echo "Convert scripts to Python..."
   tests/scripts/task_convert_scripts_to_python.sh
 
@@ -57,6 +59,8 @@ function shard1 {
 }
 
 function shard2 {
+  . "${TVM_VENV}/bin/activate"
+
   echo "Linting the Python code with pylint..."
   tests/lint/pylint.sh
 
@@ -90,4 +94,3 @@ else
   shard1
   shard2
 fi
-

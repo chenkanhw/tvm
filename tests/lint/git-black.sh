@@ -49,13 +49,13 @@ done
 export LC_ALL=C.UTF-8
 export LANG=C.UTF-8
 
-if [ ! -x "$(command -v black)" ]; then
+if [ ! -x "$(command -v "${TVM_VENV}/bin/black")" ]; then
     echo "Cannot find black"
     exit 1
 fi
 
 # Print out specific version
-VERSION=$(black --version)
+VERSION=$("${TVM_VENV}/bin/python3" -m black --version)
 echo "black version: $VERSION"
 
 # Compute Python files which changed to compare.
@@ -74,8 +74,8 @@ fi
 
 if [[ "$INPLACE_FORMAT" == "true" ]]; then
     echo "Running black on Python files against revision" $REVISION:
-    python3 -m black ${FILES[@]}
+    "${TVM_VENV}/bin/python3" -m black ${FILES[@]}
 else
     echo "Running black in checking mode"
-    python3 -m black --diff --check ${FILES[@]}
+    "${TVM_VENV}/bin/python3" -m black --diff --check ${FILES[@]}
 fi

@@ -39,7 +39,7 @@ function cleanup() {
     set +x
     if [ "${#pytest_errors[@]}" -gt 0 ]; then
         echo "These pytest invocations failed, the results can be found in the Jenkins 'Tests' tab or by scrolling up through the raw logs here."
-        python3 tests/scripts/pytest_wrapper.py "${pytest_errors[@]}"
+        "${TVM_VENV}/bin/python3" tests/scripts/pytest_wrapper.py "${pytest_errors[@]}"
         exit 1
     fi
     set -x
@@ -59,7 +59,7 @@ function run_pytest() {
 
     suite_name="${test_suite_name}-${ffi_type}"
     exit_code=0
-    TVM_FFI=${ffi_type} python3 -m pytest \
+    TVM_FFI=${ffi_type} "${TVM_VENV}/bin/python3" -m pytest \
            -o "junit_suite_name=${suite_name}" \
            "--junit-xml=${TVM_PYTEST_RESULT_DIR}/${suite_name}.xml" \
            "--junit-prefix=${ffi_type}" \
