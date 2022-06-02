@@ -6,7 +6,7 @@
 #keras = "^2.6.0"
 #mxnet = "^1.6.0"
 
-black = "<21.8b0"  # Breaks tensorflow-gpu. Revisit when tensorflow is upgraded.
+#black = "<21.8b0"  # Breaks tensorflow-gpu. Revisit when tensorflow is upgraded.
 blocklint = "==0.2.3"
 #commonmark = ">=0.7.3"
 cpplint = "==1.6.0"
@@ -30,10 +30,10 @@ pylint = "==2.4.4"
 scipy = "==1.7.3"
 sphinx = "==4.2.0"
 sphinx-gallery = "==0.4.0"
-tensorflow = "==2.6.2"
-tensorflow-aarch64 = "==2.6.2"
+tensorflow = "==2.6.5"
+tensorflow-aarch64 = "==2.6.3"
 tensorflow-estimator = "==2.6.0"
-tensorflow-gpu = "==2.6.2"
+tensorflow-gpu = "==2.6.5"
 tflite = "==2.4.0"
 torch = "==1.11.0"
 torchvision = "==0.12.0"

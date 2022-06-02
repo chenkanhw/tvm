@@ -219,6 +219,7 @@ REQUIREMENTS_BY_PIECE: RequirementsByPieceType = [
                 "autodocsumm",
                 "black",
                 "blocklint",
+                "click",
                 "commonmark",
                 "cpplint",
                 "docutils",
@@ -267,11 +268,18 @@ ConstraintsType = List[Tuple[str, Union[Tuple[str]]]]
 # 2. If TVM will functionally break against an old version of a dependency, specify a >= relation
 #    here. Include a comment linking to context or explaining why the constraint is in place.
 CONSTRAINTS = [
-    ("astroid", []),
+    (
+        "astroid",
+        [
+            "==2.3.3; 'gpu' not in extras",
+            "==*; 'gpu' in extras",
+        ],
+    ),
     ("attrs", []),
     ("autodocsumm", []),
-    ("black", []),
+    ("black", ["==22.3.0; 'gpu' not in extra"]),  # CI Constraint here due to extra filtering.
     ("blocklint", []),
+    ("click", []),
     ("cloudpickle", []),
     ("commonmark", [">=0.7.3"]),  # From PR #213.
     ("coremltools", []),
