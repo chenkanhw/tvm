@@ -75,11 +75,10 @@ import platform
 import shutil
 import sys
 import time
-
 from typing import Optional, Callable, Union, List
 
-import pytest
 import numpy as np
+import pytest
 
 import tvm
 import tvm.arith
