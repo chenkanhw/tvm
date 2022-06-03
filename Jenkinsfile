@@ -45,7 +45,7 @@
 // 'python3 jenkins/generate.py'
 // Note: This timestamp is here to ensure that updates to the Jenkinsfile are
 // always rebased on main before merging:
-// Generated at 2022-06-10T14:18:43.471418
+// Generated at 2022-06-10T14:18:51.282631
 
 import org.jenkinsci.plugins.pipeline.modeldefinition.Utils
 // NOTE: these lines are scanned by docker/dev_common.sh. Please update the regex as needed. -->
@@ -3445,9 +3445,9 @@ cancel_previous_build()
 
 prepare()
 
-// if (rebuild_docker_images) {
-//  build_docker_images()
-// }
+if (rebuild_docker_images) {
+  build_docker_images()
+}
 
 lint()
 
