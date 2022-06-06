@@ -32,6 +32,6 @@ cd papi
 git checkout papi-6-0-0-1-t
 cd src
 export PAPI_CUDA_ROOT=/usr/local/cuda
-export PAPI_ROCM_ROOT=/opt/rocm
+export PAPI_ROCM_ROOT=/opt/rocm-4.3.0
 ./configure --with-components="$1"
 make -j $(nproc) && make install
