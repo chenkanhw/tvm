@@ -30,7 +30,7 @@ echo "$BOOST_HASH" boost_1_67_0.tar.gz | sha512sum -c
 tar -xf boost_1_67_0.tar.gz
 
 pushd boost_1_67_0
-./bootstrap.sh --with-python="$(which python3.7)"
+./bootstrap.sh --with-python="$(readlink -f $(which python3.7))"
 ./b2 install --with-python --with-system --with-filesystem --with-thread --with-regex
 popd
 
