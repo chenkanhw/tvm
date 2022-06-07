@@ -45,7 +45,7 @@
 // 'python3 jenkins/generate.py'
 // Note: This timestamp is here to ensure that updates to the Jenkinsfile are
 // always rebased on main before merging:
-// Generated at 2022-06-10T14:19:29.844444
+// Generated at 2022-06-10T14:19:58.760679
 
 import org.jenkinsci.plugins.pipeline.modeldefinition.Utils
 // NOTE: these lines are scanned by docker/dev_common.sh. Please update the regex as needed. -->
@@ -58,14 +58,14 @@ aws_account_id = sh(
   ).trim()
 }
 def AWS_DEFAULT_REGION = 'us-west-2'
-ci_lint = "${aws_account_id}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/ci_lint:areusch-2ffreeze-dependencies-4233ca6eb-49"
-ci_gpu = "${aws_account_id}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/ci_gpu:areusch-2ffreeze-dependencies-6799bd6f9-49"
-ci_cpu = "${aws_account_id}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/ci_cpu:areusch-2ffreeze-dependencies-98aa6dde6-49"
-ci_wasm = "${aws_account_id}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/ci_wasm:areusch-2ffreeze-dependencies-c12a78740-49"
-ci_i386 = "${aws_account_id}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/ci_i386:areusch-2ffreeze-dependencies-89e22c948-49"
-ci_qemu = "${aws_account_id}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/ci_qemu:areusch-2ffreeze-dependencies-e839c36c8-48"
-ci_arm = "${aws_account_id}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/ci_arm:areusch-2ffreeze-dependencies-b9d48a35f-49"
-ci_hexagon = "${aws_account_id}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/ci_hexagon:areusch-2ffreeze-dependencies-e7d44544e-49"
+ci_lint = "${aws_account_id}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/ci_lint:areusch-2ffreeze-dependencies-16c9a97b9-69"
+ci_gpu = "${aws_account_id}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/ci_gpu:areusch-2ffreeze-dependencies-16c9a97b9-69"
+ci_cpu = "${aws_account_id}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/ci_cpu:areusch-2ffreeze-dependencies-16c9a97b9-69"
+ci_wasm = "${aws_account_id}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/ci_wasm:areusch-2ffreeze-dependencies-16c9a97b9-69"
+ci_i386 = "${aws_account_id}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/ci_i386:areusch-2ffreeze-dependencies-16c9a97b9-69"
+ci_qemu = "${aws_account_id}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/ci_qemu:areusch-2ffreeze-dependencies-16c9a97b9-69"
+ci_arm = "${aws_account_id}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/ci_arm:areusch-2ffreeze-dependencies-16c9a97b9-69"
+ci_hexagon = "${aws_account_id}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/ci_hexagon:areusch-2ffreeze-dependencies-16c9a97b9-69"
 // <--- End of regex-scanned config.
 
 // Parameters to allow overriding (in Jenkins UI), the images
@@ -3445,9 +3445,9 @@ cancel_previous_build()
 
 prepare()
 
-if (rebuild_docker_images) {
-  build_docker_images()
-}
+//if (rebuild_docker_images) {
+//  build_docker_images()
+//}
 
 lint()
 
