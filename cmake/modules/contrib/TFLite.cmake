@@ -15,8 +15,13 @@
 # specific language governing permissions and limitations
 # under the License.
 
-if(NOT USE_TFLITE STREQUAL "OFF")
-  message(STATUS "Build with contrib.tflite")
+if(DEFINED USE_TFLITE AND NOT DEFINED USE_TFLITE_RUNTIME)
+  message(WARNING "USE_TFLITE is renamed to USE_TFLITE_RUNTIME; please update your config.cmake")
+  set(USE_TFLITE_RUNTIME "${USE_TFLITE}")
+endif()
+
+if(NOT USE_TFLITE_RUNTIME STREQUAL "OFF")
+  message(STATUS "Build with contrib.tflite runtime")
   if (USE_TENSORFLOW_PATH STREQUAL "none")
     set(USE_TENSORFLOW_PATH ${CMAKE_CURRENT_SOURCE_DIR}/tensorflow)
   endif()
@@ -34,7 +39,7 @@ if(NOT USE_TFLITE STREQUAL "OFF")
     list(APPEND TVM_RUNTIME_LINKER_LIBS ${USE_EDGETPU}/libedgetpu/direct/aarch64/libedgetpu.so.1)
   endif()
 
-  if (USE_TFLITE STREQUAL "ON")
+  if (USE_TFLITE_RUNTIME STREQUAL "ON")
     set(USE_TFLITE ${USE_TENSORFLOW_PATH}/tensorflow/lite/tools/make/gen/*/lib)
   endif()
   find_library(TFLITE_CONTRIB_LIB libtensorflow-lite.a ${USE_TFLITE})

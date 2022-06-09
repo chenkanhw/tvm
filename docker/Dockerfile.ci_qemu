@@ -60,9 +60,9 @@ RUN bash /install/ubuntu_install_java.sh
 # COPY install/ubuntu_install_tensorflow.sh /install/ubuntu_install_tensorflow.sh
 # RUN bash /install/ubuntu_install_tensorflow.sh
 
-# TFLite deps
-# COPY install/ubuntu_install_tflite.sh /install/ubuntu_install_tflite.sh
-# RUN bash /install/ubuntu_install_tflite.sh
+# TFLite runtime deps
+COPY install/ubuntu_install_tflite_runtime.sh /install/ubuntu_install_tflite_runtime.sh
+RUN bash /install/ubuntu_install_tflite_runtime.sh
 
 # sccache
 COPY install/ubuntu_install_sccache.sh /install/ubuntu_install_sccache.sh

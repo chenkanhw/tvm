@@ -111,9 +111,9 @@ RUN bash /install/ubuntu_install_verilator.sh
 # COPY install/ubuntu_install_tensorflow.sh /install/ubuntu_install_tensorflow.sh
 # RUN bash /install/ubuntu_install_tensorflow.sh
 
-# TFLite deps
-# COPY install/ubuntu_install_tflite.sh /install/ubuntu_install_tflite.sh
-# RUN bash /install/ubuntu_install_tflite.sh
+# TFLite runtime deps
+COPY install/ubuntu_install_tflite_runtime.sh /install/ubuntu_install_tflite_runtime.sh
+RUN bash /install/ubuntu_install_tflite_runtime.sh
 
 # Compute Library
 COPY install/ubuntu_download_arm_compute_lib_binaries.sh /install/ubuntu_download_arm_compute_lib_binaries.sh

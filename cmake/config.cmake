@@ -184,10 +184,10 @@ set(USE_RANDOM ON)
 set(USE_NNPACK OFF)
 
 # Possible values:
-# - ON: enable tflite with cmake's find search
-# - OFF: disable tflite
+# - ON: enable tflite runtime with cmake's find search
+# - OFF: disable tflite runtime
 # - /path/to/libtensorflow-lite.a: use specific path to tensorflow lite library
-set(USE_TFLITE OFF)
+set(USE_TFLITE_RUNTIME OFF)
 
 # /path/to/tensorflow: tensorflow root path when use tflite library
 set(USE_TENSORFLOW_PATH none)
