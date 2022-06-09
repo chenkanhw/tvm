@@ -19,10 +19,11 @@
 set -e
 set -u
 set -o pipefail
+set -x
 
 # The tflite version should have matched versions to the tensorflow
 # version installed from pip in ubuntu_install_tensorflow.sh
-TENSORFLOW_VERSION=$(python3 -c "import tensorflow; print(tensorflow.__version__)" 2> /dev/null)
+TENSORFLOW_VERSION=$("${TVM_VENV}/bin/python3" -c "import tensorflow; print(tensorflow.__version__)" 2> /dev/null)
 
 # Download, build and install flatbuffers
 git clone --branch=v1.12.0 --depth=1 --recursive https://github.com/google/flatbuffers.git
