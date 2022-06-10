@@ -59,7 +59,14 @@ RUN bash /install/ubuntu_install_cmake_source.sh
 COPY python/build/pyproject.toml /install/python/pyproject.toml
 COPY python/build/poetry.lock /install/python/poetry.lock
 COPY install/ubuntu_install_python_package.sh /install/ubuntu_install_python_package.sh
-RUN bash /install/ubuntu_install_python_package.sh
+RUN bash /install/ubuntu_install_python_package.sh \
+    -E importer-caffe \
+    -E importer-caffe2 \
+    -E importer-tensorflow \
+    -E importer-tflite \
+    -E tvmc \
+    ;
+
 
 # TensorFlow C++ deps
 COPY install/ubuntu_install_tensorflow_aarch64.sh /install/ubuntu_install_tensorflow_aarch64.sh

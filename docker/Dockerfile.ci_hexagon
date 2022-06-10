@@ -48,7 +48,14 @@ ENV PATH $PATH:$CARGO_HOME/bin
 COPY python/build/pyproject.toml /install/python/pyproject.toml
 COPY python/build/poetry.lock /install/python/poetry.lock
 COPY install/ubuntu_install_python_package.sh /install/ubuntu_install_python_package.sh
-RUN bash /install/ubuntu_install_python_package.sh
+RUN bash /install/ubuntu_install_python_package.sh \
+    -E importer-keras \
+    -E importer-onnx \
+    -E importer-tensorflow \
+    -E importer-tflite \
+    -E tvmc \
+    ;
+
 
 # ANTLR deps
 COPY install/ubuntu_install_java.sh /install/ubuntu_install_java.sh

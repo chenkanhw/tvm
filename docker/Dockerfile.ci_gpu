@@ -53,7 +53,20 @@ RUN bash /install/ubuntu_install_opencl.sh
 COPY python/build/pyproject.toml /install/python/pyproject.toml
 COPY python/build/poetry.lock /install/python/poetry.lock
 COPY install/ubuntu_install_python_package.sh /install/ubuntu_install_python_package.sh
-RUN bash /install/ubuntu_install_python_package.sh
+RUN bash /install/ubuntu_install_python_package.sh \
+    -E gpu \
+    -E importer-coreml \
+    -E importer-darknet \
+    -E importer-keras \
+    -E importer-oneflow \
+    -E importer-onnx \
+    -E importer-paddle \
+    -E importer-pytorch \
+    -E importer-tensorflow \
+    -E importer-tflite \
+    -E tvmc \
+    -E xgboost \
+    ;
 
 # COPY install/ubuntu_install_sphinx.sh /install/ubuntu_install_sphinx.sh
 # RUN bash /install/ubuntu_install_sphinx.sh

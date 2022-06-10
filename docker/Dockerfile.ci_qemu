@@ -36,7 +36,14 @@ ENV PATH ${TVM_VENV}/bin:$PATH
 COPY python/build/pyproject.toml /install/python/pyproject.toml
 COPY python/build/poetry.lock /install/python/poetry.lock
 COPY install/ubuntu_install_python_package.sh /install/ubuntu_install_python_package.sh
-RUN bash /install/ubuntu_install_python_package.sh
+RUN bash /install/ubuntu_install_python_package.sh \
+    -E ethosu \
+    -E importer-keras \
+    -E importer-onnx \
+    -E importer-tensorflow \
+    -E importer-tflite \
+    -E tvmc \
+    ;
 
 COPY install/ubuntu1804_install_llvm.sh /install/ubuntu1804_install_llvm.sh
 RUN bash /install/ubuntu1804_install_llvm.sh
