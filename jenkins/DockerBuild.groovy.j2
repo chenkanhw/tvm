@@ -86,7 +86,12 @@ def build_image(image_name) {
     returnStdout: true,
     script: 'git log -1 --format=\'%h\''
   ).trim()
-  def full_name = "${image_name}:${env.BRANCH_NAME}-${hash}-${env.BUILD_NUMBER}"
+  def image_rev = sh(
+    script: "docker/sanitize-docker-image-name.sh ${env.BRANCH_NAME}-${hash}-${env.BUILD_NUMBER}",
+    label: "Sanitize image name",
+    returnStdout: true
+  )
+  def full_name = "${image_name}:${image_rev}"
   sh(
     script: "${docker_build} ${image_name} --spec ${full_name}",
     label: 'Build docker image'

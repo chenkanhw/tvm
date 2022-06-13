@@ -45,7 +45,7 @@
 // 'python3 jenkins/generate.py'
 // Note: This timestamp is here to ensure that updates to the Jenkinsfile are
 // always rebased on main before merging:
-// Generated at 2022-06-10T14:21:31.300009
+// Generated at 2022-06-13T16:39:11.598304
 
 import org.jenkinsci.plugins.pipeline.modeldefinition.Utils
 // NOTE: these lines are scanned by docker/dev_common.sh. Please update the regex as needed. -->
@@ -383,7 +383,12 @@ def build_image(image_name) {
     returnStdout: true,
     script: 'git log -1 --format=\'%h\''
   ).trim()
-  def full_name = "${image_name}:${env.BRANCH_NAME}-${hash}-${env.BUILD_NUMBER}"
+  def image_rev = sh(
+    script: "docker/sanitize-docker-image-name.sh ${env.BRANCH_NAME}-${hash}-${env.BUILD_NUMBER}",
+    label: "Sanitize image name",
+    returnStdout: true
+  )
+  def full_name = "${image_name}:${image_rev}"
   sh(
     script: "${docker_build} ${image_name} --spec ${full_name}",
     label: 'Build docker image'
