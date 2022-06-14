@@ -39,6 +39,10 @@ ENV RUSTUP_HOME /opt/rust
 ENV CARGO_HOME /opt/rust
 ENV PATH $PATH:$CARGO_HOME/bin
 
+# TensorFlow C++ deps
+COPY install/ubuntu_install_tensorflow_deps.sh /install/ubuntu_install_tensorflow_deps.sh
+RUN bash /install/ubuntu_install_tensorflow_deps.sh
+
 ENV TVM_VENV /venv/apache-tvm-py3.7
 COPY python/bootstrap/lockfiles /install/python/bootstrap/lockfiles
 COPY install/ubuntu1804_install_python.sh /install/ubuntu1804_install_python.sh

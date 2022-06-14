@@ -56,6 +56,10 @@ ENV PATH ${TVM_VENV}/bin:$PATH
 COPY install/ubuntu_install_cmake_source.sh /install/ubuntu_install_cmake_source.sh
 RUN bash /install/ubuntu_install_cmake_source.sh
 
+# TensorFlow C++ deps
+COPY install/ubuntu_install_tensorflow_deps.sh /install/ubuntu_install_tensorflow_deps.sh
+RUN bash /install/ubuntu_install_tensorflow_deps.sh
+
 COPY python/build/pyproject.toml /install/python/pyproject.toml
 COPY python/build/poetry.lock /install/python/poetry.lock
 COPY install/ubuntu_install_python_package.sh /install/ubuntu_install_python_package.sh
@@ -66,11 +70,6 @@ RUN bash /install/ubuntu_install_python_package.sh \
     -E importer-tflite \
     -E tvmc \
     ;
-
-
-# TensorFlow C++ deps
-COPY install/ubuntu_install_tensorflow_aarch64.sh /install/ubuntu_install_tensorflow_aarch64.sh
-RUN bash /install/ubuntu_install_tensorflow_aarch64.sh
 
 # Caffe deps
 COPY install/ubuntu_install_boost.sh /install/ubuntu_install_boost.sh
