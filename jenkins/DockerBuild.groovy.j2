@@ -20,9 +20,9 @@ def ecr_push(full_name) {
       )
       sh(
         script: """
-          set -x
-          docker tag ${full_name} \$AWS_ECR_REPO/${full_name}
-          docker push \$AWS_ECR_REPO/${full_name}
+          set -eux
+          docker tag ${full_name} ${ecr_name}
+          docker push ${ecr_name}
         """,
         label: 'Upload image to ECR'
       )
@@ -90,7 +90,7 @@ def build_image(image_name) {
     script: "docker/sanitize-docker-image-name.sh ${env.BRANCH_NAME}-${hash}-${env.BUILD_NUMBER}",
     label: "Sanitize image name",
     returnStdout: true
-  )
+  ).trim()
   def full_name = "${image_name}:${image_rev}"
   sh(
     script: "${docker_build} ${image_name} --spec ${full_name}",

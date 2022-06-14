@@ -45,7 +45,7 @@
 // 'python3 jenkins/generate.py'
 // Note: This timestamp is here to ensure that updates to the Jenkinsfile are
 // always rebased on main before merging:
-// Generated at 2022-06-13T16:39:11.598304
+// Generated at 2022-06-13T17:28:53.960037
 
 import org.jenkinsci.plugins.pipeline.modeldefinition.Utils
 // NOTE: these lines are scanned by docker/dev_common.sh. Please update the regex as needed. -->
@@ -317,9 +317,9 @@ def ecr_push(full_name) {
       )
       sh(
         script: """
-          set -x
-          docker tag ${full_name} \$AWS_ECR_REPO/${full_name}
-          docker push \$AWS_ECR_REPO/${full_name}
+          set -eux
+          docker tag ${full_name} ${ecr_name}
+          docker push ${ecr_name}
         """,
         label: 'Upload image to ECR'
       )
@@ -387,7 +387,7 @@ def build_image(image_name) {
     script: "docker/sanitize-docker-image-name.sh ${env.BRANCH_NAME}-${hash}-${env.BUILD_NUMBER}",
     label: "Sanitize image name",
     returnStdout: true
-  )
+  ).trim()
   def full_name = "${image_name}:${image_rev}"
   sh(
     script: "${docker_build} ${image_name} --spec ${full_name}",
